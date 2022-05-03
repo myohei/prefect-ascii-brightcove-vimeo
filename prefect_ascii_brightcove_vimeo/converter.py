@@ -10,7 +10,7 @@ class Converter:
         self._credentials = credentials
         self._bucket = bucket
 
-    def download_and_upload(self, src_url: str, dest_path: str):
+    async def download_and_upload(self, src_url: str, dest_path: str):
         s3 = S3(aws_access_key_id=self._credentials.aws_access_key_id,
                 aws_secret_access_key=self._credentials.aws_secret_access_key,
                 region_name=self._credentials.region_name)
