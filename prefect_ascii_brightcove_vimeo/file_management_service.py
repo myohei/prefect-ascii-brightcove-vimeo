@@ -56,4 +56,4 @@ async def fetch_video(credentials: AwsS3Credentials):
 @task()
 async def convert(credentials: AwsS3Credentials, src: str, dest: str):
     c = credentials.create_converter()
-    c.download_and_upload(src_url=src, dest_path=dest)
+    await c.download_and_upload(src_url=src, dest_path=dest)
