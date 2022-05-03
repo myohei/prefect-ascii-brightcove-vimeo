@@ -6,6 +6,8 @@ from prefect_ascii_brightcove_vimeo.tasks import (
     hello_prefect_ascii_brightcove_vimeo,
 )
 
+from prefect_ascii_brightcove_vimeo.file_management_service import (AwsS3Credentials,convert)
+
 
 @flow
 def hello_and_goodbye():
@@ -14,3 +16,7 @@ def hello_and_goodbye():
     """
     print(hello_prefect_ascii_brightcove_vimeo)
     print(goodbye_prefect_ascii_brightcove_vimeo)
+
+
+if __name__ == '__main__':
+    hello_and_goodbye()

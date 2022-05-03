@@ -13,7 +13,7 @@ from .brightcove import (
     fetch_video_source
 )
 from .file_management_service import (
-    FileManagementCredentials,
+    AwsS3Credentials,
     fetch_video
 )
 
