@@ -1,15 +1,12 @@
 from datetime import timedelta
 
 from ffmpeg_streaming import S3, CloudManager, input, Formats
-from prefect import get_run_logger
 
 
 def monitor(ffmpeg, duration, time_, time_left, process):
-    logger = get_run_logger()
     per = round(time_ / duration * 100)
-    logger.info("\rTranscoding...(%s%%) %s left [%s%s]" %
-                (per, timedelta(seconds=int(time_left)), '#' * per, '-' * (100 - per)))
-    pass
+    print("Transcoding...(%s%%) %s left [%s%s]" %
+          (per, timedelta(seconds=int(time_left)), '#' * per, '-' * (100 - per)))
 
 
 class Converter:
