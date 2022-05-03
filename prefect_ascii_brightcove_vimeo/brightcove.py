@@ -3,7 +3,7 @@ from typing import Optional, List
 import aiohttp
 from prefect import task
 
-from prefect_ascii_brightcove_vimeo.data import Video,VideoSource
+from .data import Video,VideoSource
 
 _limit = 2
 

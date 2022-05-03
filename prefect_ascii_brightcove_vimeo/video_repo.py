@@ -3,7 +3,7 @@ from typing import List
 import aiosqlite
 from prefect import task
 
-from brightcove import Video
+from .brightcove import Video
 
 
 class VideoRepo:
