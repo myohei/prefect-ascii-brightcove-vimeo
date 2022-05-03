@@ -10,11 +10,11 @@ class Converter:
         self._credentials = credentials
         self._bucket = bucket
 
-    async def download_and_upload(self, src_url: str, dest_path: str):
+    def download_and_upload(self, src_url: str, dest_path: str):
         s3 = S3(aws_access_key_id=self._credentials.aws_access_key_id,
                 aws_secret_access_key=self._credentials.aws_secret_access_key,
                 region_name=self._credentials.region_name)
-        save_to_s3 = CloudManager().add(s3, bucket_name=self._bucket)
+        save_to_s3 = CloudManager().add(s3, bucket_name=self._bucket, )
         video = input(src_url)
         stream = video.stream2file(Formats.h264())
-        stream.output(clouds=save_to_s3)
+        stream.output(dest_path, clouds=save_to_s3)
