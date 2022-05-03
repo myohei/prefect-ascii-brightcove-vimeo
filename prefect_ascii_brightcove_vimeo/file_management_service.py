@@ -2,6 +2,7 @@ import aiohttp
 import boto3
 from prefect import task
 from smart_open import open
+from dataclasses import dataclass
 
 
 class FileManagementService:
@@ -26,7 +27,22 @@ class FileManagementService:
         return f's3://{self._bucket}{path}'
 
 
+@dataclass
+class FileManagementCredentials:
+    aws_access_key_id: str
+    aws_secret_access_key: str
+    region_name: str
+    bucket: str
+
+    def create_file_management_service(self, ) -> FileManagementService:
+        client = boto3.Session(aws_access_key_id=self.aws_access_key_id,
+                               aws_secret_access_key=self.aws_secret_access_key,
+                               region_name=self.region_name, )
+        return FileManagementService(bucket=self.bucket, s3=client)
+
+
 @task
-async def fetch_video(service: FileManagementService):
-    fake_uri = 'https://s3.us-west-2.amazonaws.com/apk.yohei.org/fix_first_interview.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGEaDmFwLW5vcnRoZWFzdC0xIkgwRgIhAMgqmeUMlESO7WyyPfyL48TjQBmOvIZCzA64XztQyUHkAiEA1HudxbY%2B8%2BIQMazq9A8u0FW0T%2FcgyN1SkqUpQ5SCsNgqhQMIKhAAGgwxMDU2MzM1ODI1NDMiDB%2BfWEh2FDaCEzua5SriAkHnwrXCwOOwURvYDKsil18y9kcqY%2BCeedmJqY3koc5AXfLESp6QyzJWml6Hd3WRrje0J0shw1E2CJQaZe6uev2mzFk1kYZjcUu2nQJeFJhp%2BSaX0fyHeVFJ3LGttuR1nBInyPtmrCwzIWg7aLK2VExBWE9KmQuCPBvpT%2BLnrWddAegttQcTO%2BVLSIYZptcfO7WNqudAoCJaIph4GWHs57UYTrLtuHSyNrZEx%2Bk9mku0tBRX7f1WAvZLcLqEJ5M9cUAGsJ%2FKkvGmOZ598Ofp39cv8QmzPfFdQgPGdhqDqJEV7rXcvbhBZbfe85ssLQ4AYh8b2vPH7OFVuQHarp5Q4XIH56QZ%2Bu69z2Q4iaVTkwYlSgJywrpaAyerxlF2mdSLMkoH7DSv%2BhOIfo%2BKO0e3uZZ%2FduXdgN%2F7Nq%2FtHhOBKjkwY7ocvIhj%2FrWCG8Wtn1ffLonX%2F03CBHa%2BiVFniR4KEKeFDTDpj7mTBjqyAnDugS7PWrWFHdefPFVM9x6gYn72RZT3yAD9WbGTRtCDn69sEiv7ipRc3AqKNuLp%2FmHseaT1vc3WBkTNc0e2orolYbLeg%2BFCSoA1HgfuHjoY04%2BjEE5A2uPMBrrseNGHfjmzBAixuWm29UrpO8dBaDjXCgnMnfgkPC7hMu5L1455uSloqq98lHbBuUEdKVye7JGSr7%2BSYJH78ub6KH4FGxKIS08z76vfWEspL3Cj86eAUiPX6aWO8TJB6DK%2BPpAecWs1s1wc8aB8C8bQ1XqPqScEPNyw%2FRg8tWxcSGo%2FOzelVFXgiDaY6k4WiC4bZYJtqV9K45ycUvbd0CPexXRptJc1MhLxU6PqQWBCXNCImJaCQDeViSd8lyZmW78uYB%2BN6ekRzHuKOqRz3qR5PvnUnbbBmw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220501T084513Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIARRGCARXH2WQ2FTCV%2F20220501%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=fd2d5600a48c3dfcfc4c6fe611921a323ececb254548bcbb4fe6f66347961c9e'
+async def fetch_video(credentials: FileManagementCredentials):
+    service = credentials.create_file_management_service()
+    fake_uri = 'https://s3.us-west-2.amazonaws.com/apk.yohei.org/fix_first_interview.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEI7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0xIkcwRQIgB02dRmtp6SN4J%2Frr3ZQWsq4Ny%2FomfKOhEJOR3BgXYcMCIQCySfn8DRJU3FoKwQ%2FMYM%2B%2BDxG703D9WutQyOPjOlmCAir7AghXEAAaDDEwNTYzMzU4MjU0MyIMZvBUA0YtNizadplnKtgCX4SW7w4JO4CUhCUosl9lZBas2NBDEinHkyI3NcvCzY9%2B0VrzhHBQgKmgyREl3Mqm95ZLHikCU5Mg7nussnmdtP%2FCwWOurQfQoCV5J%2FOnVcNCYCFjDJtXoyRbo3TSFN6pnn8QqR3%2Fy4dJjX3h%2Bhoq6qlKRE543f7BQb07zFTRZ70xBpCZne9PggUn0A9pwa9m2whLRGv%2F3zqrhtdaSnUyET8LcWB7koPlCVihAi3iEttR5meOMac1JebAnCN37aZ4s72btey4O3FAJvWmOdct%2BaHDks8tnCwiUfuZQsXK4B0RBIR5Z51fYCdD9ze9fku6geV%2Fz3EShLaamqMXNFcvdW1lDKMKShpHviYa2kO1k8XE2fbpYDmkb%2BaUSwgTb%2Ft5cH%2FmePlbC9GCVHz%2F8Ng2ikIPhPytpM3ytgWfYxpLKLBNtTaHCIs5DJeYyM21Qsv1C40vJvJdKtgw%2FY7DkwY6swLRoAud0Itc3r3%2FbUjbayO%2Fu2zXLNaj1a9rnq78Wqhl63LyVN4WXCKEGvrVQ2mKmVV76Fxvb7KgBnSpVUym2VR3C%2BYzPHDPMWjnCtg7OUrcf7UnK21tJDYvgVNKShd5U1w5PgMqOXaFFFNY0bAvLM%2BoevSBgpwUdNQJliHie9EKBIHVXr64agGtijAEs8E2JtL4UxOoP8hyX1e%2F66onHvil1yk5wPje%2FNHK9MwumCvdM10xYxSnRb8uOK9EAOfVp%2BJ7XVl3pI%2FnsLeJ8J%2BYeTevF%2FGSEhgk0ebFBq76TlDPFm9bVNWKMUgPS%2BG52DIfwHuTVqnFoccxyMw6aHKMmWfPfWM7ahYSVl8%2BHFX0j4UImP6OF3GBvgW4xuTDDFARUI1%2Fmq1xUXMP%2FXzqIeG1OSR80cXJ&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220503T073250Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIARRGCARXHUNAWPRS5%2F20220503%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=494e33d572e97fb0692877f1bfb2434ac9274ea139f13eaa3bcb434e2a0bf672'
     await service.download_and_upload(src_url=fake_uri, dest_path='/dest/sample.mp4')

@@ -1,19 +1,19 @@
 from . import _version
-from .video_repo import (
-    VideoRepo,
-    save_data,
-)
+# from .video_repo import (
+#     VideoRepo,
+#     save_data,
+# )
 from .data import (
     Video,
     VideoSource
 )
 from .brightcove import (
-    BrightcoveService,
+    BrightcoveCredentials,
     fetch_brightcove_data,
     fetch_video_source
 )
 from .file_management_service import (
-    FileManagementService,
+    FileManagementCredentials,
     fetch_video
 )
 

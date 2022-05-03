@@ -5,7 +5,10 @@ from prefect import task
 
 from .brightcove import Video
 
+from dataclasses import dataclass
 
+
+@dataclass()
 class VideoRepo:
     _db: aiosqlite.Connection
 

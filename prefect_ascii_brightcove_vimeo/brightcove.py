@@ -1,9 +1,10 @@
+import base64
 from typing import Optional, List
 
 import aiohttp
-from prefect import task
-
-from .data import Video,VideoSource
+from prefect import task, get_run_logger
+from dataclasses import dataclass
+from .data import Video, VideoSource
 
 _limit = 2
 
@@ -50,7 +51,7 @@ class BrightcoveService:
             if not resp.ok:
                 raise Exception('video get error')
             json = await resp.json()
-            size = len(json)
+            get_run_logger().info(json)
             videos = Video.schema().load(json, many=True)
             return videos
 
@@ -65,16 +66,35 @@ class BrightcoveService:
             if not resp.ok:
                 raise Exception(f'video source get error: response {resp.status}')
             json = await resp.json()
+            get_run_logger().info(json)
             video_sources = VideoSource.schema().load(json, many=True)
             return video_sources
 
 
-@task
-async def fetch_brightcove_data(service: BrightcoveService) -> List[Video]:
-    return await service.get_all_videos()
+@dataclass
+class BrightcoveCredentials:
+    account_id: str
+    client_id: str
+    client_secret: str
+
+    def create_service(self) -> BrightcoveService:
+        plain_auth_str = f'{self.client_id}:{self.client_secret}'
+        auth_str = base64.b64encode(plain_auth_str.encode()).decode()
+        return BrightcoveService(auth_str=auth_str, account_id=self.account_id)
 
 
 @task
-async def fetch_video_source(service: BrightcoveService, video_id: str):
+async def fetch_brightcove_data(credentials: BrightcoveCredentials) -> List[Video]:
+    service = credentials.create_service()
+    result = await service.get_all_videos()
+    await service.ses.close()
+    return result
+
+
+@task
+async def fetch_video_source(credentials: BrightcoveCredentials, video_id: str):
+    service = credentials.create_service()
     sources = await service.get_video_source(video_id=video_id)
+    await service.ses.close()
     print(sources)
+    return sources
