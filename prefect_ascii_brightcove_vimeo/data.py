@@ -100,9 +100,8 @@ class Video:
 class VideoSource:
     uploaded_at: str
     src: str
-    ext_x_version: int
+    ext_x_version: str
     type: str
 
     def is_mp4(self):
         return self.type.endswith('mp4')
-
