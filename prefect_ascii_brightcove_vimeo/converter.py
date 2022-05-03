@@ -17,4 +17,5 @@ class Converter:
         save_to_s3 = CloudManager().add(s3, bucket_name=self._bucket, )
         video = input(src_url)
         stream = video.stream2file(Formats.h264())
-        stream.output(dest_path, clouds=save_to_s3)
+        stream.output(dest_path, clouds=save_to_s3,run_command=False)
+        await stream.async_run()
