@@ -1,0 +1,2 @@
+include versioneer.py
+include prefect_ascii_brightcove_vimeo/_version.py
