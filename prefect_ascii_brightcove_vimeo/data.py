@@ -100,8 +100,9 @@ class Video:
 class VideoSource:
     uploaded_at: str
     src: str
-    ext_x_version: str
     type: str
+    ext_x_version: Optional[str] = None
+    profiles: Optional[str] = None
 
     def is_mp4(self):
         return self.type.endswith('mp4')
