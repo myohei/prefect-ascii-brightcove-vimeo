@@ -1,4 +1,16 @@
+from datetime import timedelta
+
 from ffmpeg_streaming import S3, CloudManager, input, Formats
+from prefect import get_run_logger
+
+logger = get_run_logger()
+
+
+def monitor(ffmpeg, duration, time_, time_left, process):
+    per = round(time_ / duration * 100)
+    logger.info("\rTranscoding...(%s%%) %s left [%s%s]" %
+                (per, timedelta(seconds=int(time_left)), '#' * per, '-' * (100 - per)))
+    pass
 
 
 class Converter:
@@ -17,4 +29,4 @@ class Converter:
         video = input(src_url)
         stream = video.stream2file(Formats.h264())
         stream.output(dest_path, clouds=save_to_s3, run_command=False)
-        await stream.async_run(ffmpeg_bin='ffmpeg')
+        await stream.async_run(ffmpeg_bin='ffmpeg', monitor=monitor)
