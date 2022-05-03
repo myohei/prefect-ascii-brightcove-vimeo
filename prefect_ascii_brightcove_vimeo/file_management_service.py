@@ -1,6 +1,7 @@
 import aiohttp
 import boto3
-from prefect import task
+from prefect import task, task_runners
+from prefect.task_runners import SequentialTaskRunner
 from smart_open import open
 from dataclasses import dataclass
 
@@ -53,7 +54,7 @@ async def fetch_video(credentials: AwsS3Credentials):
     await service.download_and_upload(src_url=fake_uri, dest_path='/dest/sample.mp4')
 
 
-@task
-def convert(credentials: AwsS3Credentials, src: str, dest: str):
+@task(task_runner=SequentialTaskRunner)
+async def convert(credentials: AwsS3Credentials, src: str, dest: str):
     c = credentials.create_converter()
     c.download_and_upload(src_url=src, dest_path=dest)
