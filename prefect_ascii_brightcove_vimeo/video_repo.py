@@ -25,6 +25,7 @@ class VideoRepo:
 
     async def save(self, video: Video):
         await self._db.execute("insert into videos values(?,?)", (video.id, video.to_json()))
+        await self._db.commit()
 
     async def findall(self) -> List[Video]:
         videos = []
