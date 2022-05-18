@@ -862,7 +862,7 @@ pytzdata = ">=2020.1"
 
 [[package]]
 name = "prefect"
-version = "2.0b3"
+version = "2.0b5"
 description = "Workflow orchestration and management."
 category = "main"
 optional = false
@@ -872,19 +872,19 @@ python-versions = ">=3.7"
 aiofiles = ">=0.7.0"
 aiosqlite = ">=0.17.0"
 alembic = ">=1.7.5"
-anyio = ">=3.2.1"
+anyio = ">=3.4.0"
 asgi-lifespan = ">=1.0"
 asyncpg = ">=0.23"
 azure-storage-blob = ">=12.9.0"
 boto3 = ">=1.20.0"
-click = ">=7.1.2,<8.1"
+click = ">=8.0,<8.2"
 cloudpickle = ">=1.5"
 coolname = ">=1.0.4"
 croniter = ">=1.0.1"
 cryptography = ">=36.0.1"
-distributed = ">=2021.8.0"
+distributed = ">=2021.08.0"
 docker = ">=4.0"
-fastapi = ">=0.66"
+fastapi = ">=0.70"
 fsspec = ">=2021.7.0"
 google-cloud-storage = ">=2.1.0"
 httpx = ">=0.22"
@@ -893,7 +893,7 @@ pendulum = ">=2.1.2"
 pydantic = ">=1.8.2"
 python-slugify = ">=5.0"
 pytz = ">=2021.1"
-pyyaml = ">=5.1b1"
+pyyaml = ">=5.1"
 readchar = ">=3.0.5"
 rich = ">=10.0"
 sqlalchemy = {version = ">=1.4.20,<1.4.33 || >1.4.33", extras = ["asyncio"]}
@@ -903,7 +903,7 @@ typing-extensions = ">=3.10.0.1"
 uvicorn = ">=0.14.0"
 
 [package.extras]
-dev = ["flake8", "ipython", "jinja2", "mkdocs", "mkdocs-gen-files", "mkdocs-material", "mkdocstrings", "moto", "mypy", "pre-commit", "pytest", "pytest-asyncio (>=0.18.2)", "pytest-env", "pytest-timeout", "pytkdocs (>=0.13.0)", "pyyaml", "requests", "virtualenv", "watchgod", "respx", "mock", "setuptools (!=60.9.0)"]
+dev = ["flake8", "flaky", "ipython", "jinja2", "mkdocs", "mkdocs-gen-files", "mkdocs-material", "mkdocstrings", "moto", "mypy", "pre-commit", "pytest", "pytest-asyncio (>=0.18.2)", "pytest-env", "pytest-timeout", "pytkdocs (>=0.13.0)", "pyyaml", "requests", "virtualenv", "watchfiles", "respx", "mock", "setuptools (!=60.9.0)"]
 
 [[package]]
 name = "protobuf"
@@ -1532,6 +1532,7 @@ boto3 = [
 ]
 botocore = [
     {file = "botocore-1.25.5-py3-none-any.whl", hash = "sha256:bcbacc0ec0a1f44cbf7e6d8112af8096eed41bec75e90af06f8bf61f20d820aa"},
+    {file = "botocore-1.25.5.tar.gz", hash = "sha256:9f2f143fe8581eb9c43c0934b7daf706067afa409171a80b103f458977fcfbd4"},
 ]
 cachetools = [
     {file = "cachetools-5.0.0-py3-none-any.whl", hash = "sha256:8fecd4203a38af17928be7b90689d8083603073622229ca7077b72d8e5a976e4"},
@@ -2098,8 +2099,8 @@ pendulum = [
     {file = "pendulum-2.1.2.tar.gz", hash = "sha256:b06a0ca1bfe41c990bbf0c029f0b6501a7f2ec4e38bfec730712015e8860f207"},
 ]
 prefect = [
-    {file = "prefect-2.0b3-py3-none-any.whl", hash = "sha256:b36394196c15bc0fd9a36282ed25c5e811612270d88f21b8805e174a47316a4c"},
-    {file = "prefect-2.0b3.tar.gz", hash = "sha256:df2541547b8003ff27b4c947e091c4769f0b1dd27ae457ef9e81e53a2e29fbff"},
+    {file = "prefect-2.0b5-py3-none-any.whl", hash = "sha256:0c4b37b3b60eac24a9b3e5bd8a1249d87ff183e283425407a421433a2349c418"},
+    {file = "prefect-2.0b5.tar.gz", hash = "sha256:658c36bee4ae3b718a27690c1af4c0b2bdd0e54fbe9abff520749ddf779f6215"},
 ]
 protobuf = [
     {file = "protobuf-3.20.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:3cc797c9d15d7689ed507b165cd05913acb992d78b379f6014e013f9ecb20996"},
