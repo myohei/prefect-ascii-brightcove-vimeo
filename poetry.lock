@@ -165,14 +165,14 @@ msrest = ">=0.6.21"
 
 [[package]]
 name = "boto3"
-version = "1.22.5"
+version = "1.23.3"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.25.5,<1.26.0"
+botocore = ">=1.26.3,<1.27.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -181,7 +181,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.25.5"
+version = "1.26.3"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -1377,7 +1377,7 @@ heapdict = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "023224b2404097a30c4aae2d52391cfb8ba6e3c33b566032fa3cdfa06d13beaf"
+content-hash = "c5904cc45bc48eb853bb08ca2fc04a3474e92b84667cf6135886e0cef6901efa"
 
 [metadata.files]
 aiofiles = [
@@ -1527,11 +1527,12 @@ azure-storage-blob = [
     {file = "azure_storage_blob-12.11.0-py3-none-any.whl", hash = "sha256:f3dfa605aefb453e7489328b76811a937a411761d7a1613a58c3975c556ec778"},
 ]
 boto3 = [
-    {file = "boto3-1.22.5-py3-none-any.whl", hash = "sha256:e6b4a4970cb9210d455f348577d9e0485f86c44baf278b8220e8ab5587d03470"},
-    {file = "boto3-1.22.5.tar.gz", hash = "sha256:dbbeee6d535a311d4d646a9dd683b216bf17d59345367432a22a21b50eb43a8e"},
+    {file = "boto3-1.23.3-py3-none-any.whl", hash = "sha256:5f27eec9b0a43edbfb3ed5e748837b10219a972f0728fecd78f84ec3629f2092"},
+    {file = "boto3-1.23.3.tar.gz", hash = "sha256:9d5ce5ae3ddd4429cf752efe7c9f39691db6c85b6b5f1cfc8861b8f23b72b67a"},
 ]
 botocore = [
-    {file = "botocore-1.25.5-py3-none-any.whl", hash = "sha256:bcbacc0ec0a1f44cbf7e6d8112af8096eed41bec75e90af06f8bf61f20d820aa"},
+    {file = "botocore-1.26.3-py3-none-any.whl", hash = "sha256:869308e29c1e8a9baa3e2fc336a1293e098855e34ea77c035dc4194a96316688"},
+    {file = "botocore-1.26.3.tar.gz", hash = "sha256:f83c5cd7b3e1889aabf2fcf7926ddafc41f249a29f76f37cdb9e8680ac9b5af4"},
 ]
 cachetools = [
     {file = "cachetools-5.0.0-py3-none-any.whl", hash = "sha256:8fecd4203a38af17928be7b90689d8083603073622229ca7077b72d8e5a976e4"},
